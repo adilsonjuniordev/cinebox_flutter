@@ -1,4 +1,4 @@
-package com.example.cinebox_flutter
+package br.com.adidev.cinebox
 
 import io.flutter.embedding.android.FlutterActivity
 

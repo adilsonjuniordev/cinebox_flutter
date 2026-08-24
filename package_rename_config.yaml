@@ -1,0 +1,11 @@
+package_rename_config:
+  android:
+    app_name: "Cinebox" # Display name
+    package_name: "br.com.adidev.cinebox" # Package name
+    override_old_package: "com.example.cinebox_flutter" # Optional: Cleans up old folder structure
+    lang: "kotlin" # Optional: "kotlin" (default) or "java"
+
+  ios:
+    app_name: "Cinebox" # Display name
+    bundle_name: "Cinebox" # Bundle name
+    package_name: "br.com.adidev.cinebox" # Product Bundle Identifier
