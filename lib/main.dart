@@ -6,7 +6,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  GoogleSignIn.instance.initialize(serverClientId: Env.googleApiKeys);
+  GoogleSignIn.instance.initialize(
+    serverClientId: Env.googleApiKeyWeb,
+    clientId: Env.googleApiKeyIos,
+  );
 
   runApp(ProviderScope(child: const CineboxMainApp()));
 }

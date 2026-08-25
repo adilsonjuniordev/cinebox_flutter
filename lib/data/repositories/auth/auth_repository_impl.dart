@@ -1,17 +1,24 @@
 import 'dart:developer';
 
 import 'package:cinebox_flutter/core/result/result.dart';
-import 'package:cinebox_flutter/data/core/services/google_sign_in/google_sign_in_service.dart';
-import 'package:cinebox_flutter/data/core/services/local_storage/local_storage_service.dart';
+import 'package:cinebox_flutter/data/services/auth/auth_service.dart';
+import 'package:cinebox_flutter/data/services/google_sign_in/google_sign_in_service.dart';
+import 'package:cinebox_flutter/data/services/local_storage/local_storage_service.dart';
 import 'package:cinebox_flutter/data/exceptions/data_exception.dart';
+import 'package:dio/dio.dart';
 
 import './auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final LocalStorageService _localStorageService;
   final GoogleSignInService _googleSignInService;
+  final AuthService _authService;
 
-  new({required this._localStorageService, required this._googleSignInService});
+  new({
+    required this._localStorageService,
+    required this._googleSignInService,
+    required this._authService,
+  });
 
   @override
   Future<Result<Unit>> signIn() async {
@@ -19,8 +26,21 @@ class AuthRepositoryImpl implements AuthRepository {
 
     switch (result) {
       case Success<String>(:final value):
-        await _localStorageService.saveIdToken(value);
-        return successOfUnit();
+        try {
+          await _localStorageService.saveIdToken(value);
+          await _authService.auth();
+          return successOfUnit();
+        } on DioException catch (e, s) {
+          log(
+            'Erro ao autenticar o usuário com o backend',
+            name: 'AuthRepositoryImpl',
+            error: e,
+            stackTrace: s,
+          );
+          return Failure(
+            DataException(message: 'Erro ao realizar login no backend'),
+          );
+        }
 
       case Failure<String>(:final error):
         log(

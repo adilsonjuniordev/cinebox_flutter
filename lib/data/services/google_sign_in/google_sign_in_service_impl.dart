@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:cinebox_flutter/core/result/result.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import './google_sign_in_service.dart';
+import 'google_sign_in_service.dart';
 
 class GoogleSignInServiceImpl implements GoogleSignInService {
   @override

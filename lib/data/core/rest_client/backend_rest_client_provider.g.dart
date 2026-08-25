@@ -47,4 +47,4 @@ final class BackendRestClientProvider extends $FunctionalProvider<Dio, Dio, Dio>
   }
 }
 
-String _$backendRestClientHash() => r'6b6a72967637c7a90b7731a4a85c3683336db21f';
+String _$backendRestClientHash() => r'a90aecd288a7b4a06cff0397c40cc7aadb99ea28';

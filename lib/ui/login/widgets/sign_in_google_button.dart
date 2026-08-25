@@ -27,10 +27,6 @@ class SignInGoogleButton extends StatelessWidget {
             alignment: .centerLeft,
             child: Visibility(
               visible: !isLoading,
-              child: Align(
-                alignment: .centerLeft,
-                child: Image.asset(R.assetsImagesGoogleLogoPng),
-              ),
               replacement: Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: SizedBox(
@@ -41,6 +37,10 @@ class SignInGoogleButton extends StatelessWidget {
                     strokeWidth: 1.5,
                   ),
                 ),
+              ),
+              child: Align(
+                alignment: .centerLeft,
+                child: Image.asset(R.assetsImagesGoogleLogoPng),
               ),
             ),
           ),

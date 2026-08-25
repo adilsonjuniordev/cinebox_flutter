@@ -3,8 +3,11 @@ part 'env.g.dart';
 
 @Envied()
 abstract class Env {
-  @EnviedField(varName: 'GOOGLE_API_KEYS', obfuscate: true)
-  static final String googleApiKeys = _Env.googleApiKeys;
+  @EnviedField(varName: 'GOOGLE_API_KEY_WEB', obfuscate: true)
+  static final String googleApiKeyWeb = _Env.googleApiKeyWeb;
+
+  @EnviedField(varName: 'GOOGLE_API_KEY_IOS', obfuscate: true)
+  static final String googleApiKeyIos = _Env.googleApiKeyIos;
 
   @EnviedField(varName: 'THE_MOVIE_DB_API_KEY', obfuscate: true)
   static final String theMovieDbApiKey = _Env.theMovieDbApiKey;

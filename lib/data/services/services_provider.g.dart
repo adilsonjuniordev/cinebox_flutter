@@ -104,3 +104,44 @@ final class GoogleSignInServiceProvider
 
 String _$googleSignInServiceHash() =>
     r'8181dbf8b01ff5c3b885d21362b7665a2d4167ed';
+
+@ProviderFor(authService)
+final authServiceProvider = AuthServiceProvider._();
+
+final class AuthServiceProvider
+    extends $FunctionalProvider<AuthService, AuthService, AuthService>
+    with $Provider<AuthService> {
+  AuthServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'authServiceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$authServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<AuthService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AuthService create(Ref ref) {
+    return authService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AuthService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AuthService>(value),
+    );
+  }
+}
+
+String _$authServiceHash() => r'0ec29a3b3d1d112a0e94b59b92eda9ba461fa04d';

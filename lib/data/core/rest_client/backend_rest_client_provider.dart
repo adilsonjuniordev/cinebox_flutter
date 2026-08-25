@@ -1,4 +1,5 @@
 import 'package:cinebox_flutter/config/env.dart';
+import 'package:cinebox_flutter/data/core/rest_client/interceptors/backend_auth_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -16,6 +17,7 @@ Dio backendRestClient(Ref ref) {
 
   dio.options.headers['Content-Type'] = 'application/json';
   dio.interceptors.addAll([
+    BackendAuthInterceptor(ref: ref),
     LogInterceptor(
       request: true,
       requestHeader: true,
