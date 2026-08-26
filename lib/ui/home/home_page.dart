@@ -1,5 +1,5 @@
 import 'package:cinebox_flutter/ui/home/widgets/home_bottom_nav_bar.dart';
-import 'package:cinebox_flutter/ui/movies/mobies_page.dart';
+import 'package:cinebox_flutter/ui/movies/movies_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
