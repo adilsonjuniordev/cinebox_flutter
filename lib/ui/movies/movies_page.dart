@@ -1,6 +1,7 @@
 import 'package:cinebox_flutter/ui/movies/widgets/genres_box.dart';
 import 'package:cinebox_flutter/ui/movies/widgets/movies_appbar.dart';
 import 'package:cinebox_flutter/ui/movies/widgets/movies_by_category.dart';
+import 'package:cinebox_flutter/ui/movies/widgets/movies_by_genrer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,7 +25,8 @@ class _MoviesPageState extends ConsumerState<MoviesPage> {
           ),
         ),
         SliverToBoxAdapter(
-          child: MoviesByCategory(),
+          //child: MoviesByCategory(), //Fazer chaveamento
+          child: MoviesByGenrer(),
         ),
       ],
     );
