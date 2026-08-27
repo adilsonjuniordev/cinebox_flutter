@@ -65,7 +65,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<Unit>> signOu() async {
+  Future<Result<Unit>> signOut() async {
     final result = await _googleSignInService.signOut();
 
     switch (result) {
