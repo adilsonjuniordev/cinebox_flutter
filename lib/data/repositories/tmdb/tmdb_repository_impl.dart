@@ -4,6 +4,7 @@ import 'package:cinebox_flutter/core/result/result.dart';
 import 'package:cinebox_flutter/data/exceptions/data_exception.dart';
 import 'package:cinebox_flutter/data/mappers/movie_mapper.dart';
 import 'package:cinebox_flutter/data/services/tmdb/tmdb_service.dart';
+import 'package:cinebox_flutter/domain/models/genre.dart';
 
 import 'package:cinebox_flutter/domain/models/movie.dart';
 import 'package:dio/dio.dart';
@@ -106,6 +107,27 @@ class TmdbRepositoryImpl implements TmdbRepository {
       );
 
       return Failure(DataException(message: 'Erro ao buscar filmes em breve'));
+    }
+  }
+
+  @override
+  Future<Result<List<Genre>>> getGenres({String language = 'pt-BR'}) async {
+    try {
+      final data = await _tmdbService.getMoviesGenres();
+      final genres = data.genres
+          .map((g) => Genre(id: g.id, name: g.name))
+          .toList();
+      return Success(genres);
+    } on DioException catch (e, s) {
+      log(
+        'Erro ao buscar generos',
+        error: e,
+        stackTrace: s,
+      );
+
+      return Failure(
+        DataException(message: 'Erro ao buscar gêneros'),
+      );
     }
   }
 }

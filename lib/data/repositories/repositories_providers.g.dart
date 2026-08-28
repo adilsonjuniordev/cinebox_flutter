@@ -50,25 +50,25 @@ final class AuthRepositoryProvider
 
 String _$authRepositoryHash() => r'c59f4bcd2116100bf3114018981490d653b4f6e8';
 
-@ProviderFor(tmbdRepository)
-final tmbdRepositoryProvider = TmbdRepositoryProvider._();
+@ProviderFor(tmdbRepository)
+final tmdbRepositoryProvider = TmdbRepositoryProvider._();
 
-final class TmbdRepositoryProvider
+final class TmdbRepositoryProvider
     extends $FunctionalProvider<TmdbRepository, TmdbRepository, TmdbRepository>
     with $Provider<TmdbRepository> {
-  TmbdRepositoryProvider._()
+  TmdbRepositoryProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'tmbdRepositoryProvider',
+        name: r'tmdbRepositoryProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$tmbdRepositoryHash();
+  String debugGetCreateSourceHash() => _$tmdbRepositoryHash();
 
   @$internal
   @override
@@ -77,7 +77,7 @@ final class TmbdRepositoryProvider
 
   @override
   TmdbRepository create(Ref ref) {
-    return tmbdRepository(ref);
+    return tmdbRepository(ref);
   }
 
   /// {@macro riverpod.override_with_value}
@@ -89,4 +89,4 @@ final class TmbdRepositoryProvider
   }
 }
 
-String _$tmbdRepositoryHash() => r'2eb8ffd5cc655cecad65b028380a41c35dde5a16';
+String _$tmdbRepositoryHash() => r'ba312a23bb145753431fddc7d923d6c8f6af9d87';

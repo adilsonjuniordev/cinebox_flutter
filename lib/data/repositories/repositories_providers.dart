@@ -17,7 +17,7 @@ AuthRepository authRepository(Ref ref) {
 }
 
 @Riverpod()
-TmdbRepository tmbdRepository(Ref ref) {
+TmdbRepository tmdbRepository(Ref ref) {
   return TmdbRepositoryImpl(
     tmdbService: ref.read(tmdbSericeProvider),
   );

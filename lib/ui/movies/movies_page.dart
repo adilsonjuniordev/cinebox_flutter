@@ -30,7 +30,6 @@ class _MoviesPageState extends ConsumerState<MoviesPage> {
     return CustomScrollView(
       slivers: [
         MoviesAppBar(),
-
         SliverToBoxAdapter(
           child: Container(
             margin: EdgeInsets.only(top: 22),

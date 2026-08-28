@@ -56,4 +56,4 @@ final class GetMoviesByCategoryUsecaseProvider
 }
 
 String _$getMoviesByCategoryUsecaseHash() =>
-    r'78fbfee94418d6128e7cab40d576ec1b3a84cf3d';
+    r'ee1e937b2a6758ba1014ec7b0a329dcbccfeda95';
