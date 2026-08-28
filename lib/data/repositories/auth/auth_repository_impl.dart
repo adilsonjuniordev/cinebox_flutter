@@ -14,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final GoogleSignInService _googleSignInService;
   final AuthService _authService;
 
-  new({
+  AuthRepositoryImpl({
     required this._localStorageService,
     required this._googleSignInService,
     required this._authService,

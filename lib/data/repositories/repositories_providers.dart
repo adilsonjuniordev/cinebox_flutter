@@ -1,3 +1,5 @@
+import 'package:cinebox_flutter/data/repositories/tmdb/tmdb_repository.dart';
+import 'package:cinebox_flutter/data/repositories/tmdb/tmdb_repository_impl.dart';
 import 'package:cinebox_flutter/data/services/services_provider.dart';
 import 'package:cinebox_flutter/data/repositories/auth/auth_repository.dart';
 import 'package:cinebox_flutter/data/repositories/auth/auth_repository_impl.dart';
@@ -11,5 +13,12 @@ AuthRepository authRepository(Ref ref) {
     localStorageService: ref.read(localStorageServiceProvider),
     googleSignInService: ref.read(googleSignInServiceProvider),
     authService: ref.read(authServiceProvider),
+  );
+}
+
+@Riverpod()
+TmdbRepository tmbdRepository(Ref ref) {
+  return TmdbRepositoryImpl(
+    tmdbService: ref.read(tmdbSericeProvider),
   );
 }

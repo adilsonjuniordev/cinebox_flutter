@@ -2,7 +2,11 @@ import 'package:cinebox_flutter/ui/core/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
 
 class MoviesBox extends StatelessWidget {
-  const MoviesBox({super.key, required this.title, this.vertical = false});
+  const MoviesBox({
+    super.key,
+    required this.title,
+    this.vertical = false,
+  });
 
   final String title;
   final bool vertical;

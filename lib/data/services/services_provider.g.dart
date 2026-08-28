@@ -103,7 +103,7 @@ final class GoogleSignInServiceProvider
 }
 
 String _$googleSignInServiceHash() =>
-    r'8181dbf8b01ff5c3b885d21362b7665a2d4167ed';
+    r'72f616ec6ecce32376fba07999fbca173009cd02';
 
 @ProviderFor(authService)
 final authServiceProvider = AuthServiceProvider._();
@@ -144,4 +144,45 @@ final class AuthServiceProvider
   }
 }
 
-String _$authServiceHash() => r'0ec29a3b3d1d112a0e94b59b92eda9ba461fa04d';
+String _$authServiceHash() => r'31a8a9a10730e10286fb81ccf5021779585ae9b4';
+
+@ProviderFor(tmdbSerice)
+final tmdbSericeProvider = TmdbSericeProvider._();
+
+final class TmdbSericeProvider
+    extends $FunctionalProvider<TmdbService, TmdbService, TmdbService>
+    with $Provider<TmdbService> {
+  TmdbSericeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'tmdbSericeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$tmdbSericeHash();
+
+  @$internal
+  @override
+  $ProviderElement<TmdbService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  TmdbService create(Ref ref) {
+    return tmdbSerice(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TmdbService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TmdbService>(value),
+    );
+  }
+}
+
+String _$tmdbSericeHash() => r'29d3686e9011c8a52cc6e5dd3b604e109f8631ac';
