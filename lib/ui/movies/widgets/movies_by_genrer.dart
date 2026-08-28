@@ -16,6 +16,7 @@ class _MoviesByGenrerState extends ConsumerState<MoviesByGenrer> {
       margin: EdgeInsets.only(bottom: 130),
       child: MoviesBox(
         title: 'Filmes encontrados',
+        movies: [],
         vertical: true,
       ),
     );

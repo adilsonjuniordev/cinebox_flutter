@@ -2,8 +2,7 @@ import 'package:cinebox_flutter/data/models/genre_response.dart';
 import 'package:cinebox_flutter/data/models/movie_details_response.dart';
 import 'package:cinebox_flutter/data/models/movie_response.dart';
 import 'package:dio/dio.dart';
-import 'package:retrofit/error_logger.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
 part 'tmdb_service.g.dart';
 
@@ -56,9 +55,9 @@ abstract class TmdbService {
   });
 
   @GET('/movie/{movie_id}?include_image_language=pt,null')
-  Future<MovieDetailsResponse> getMovieDetails({
+  Future<MovieDetailsResponse> getMovieDetails(
+    @Path('movie_id') int movieId, {
     @Query('language') String language = 'pt-BR',
-    @Path('movie_id') required int movieId,
     @Query('append_to_response') String appendToResponse = '',
   });
 }

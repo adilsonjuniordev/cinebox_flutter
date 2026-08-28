@@ -1,3 +1,4 @@
+import 'package:cinebox_flutter/domain/models/movie.dart';
 import 'package:cinebox_flutter/ui/core/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
 
@@ -5,10 +6,12 @@ class MoviesBox extends StatelessWidget {
   const MoviesBox({
     super.key,
     required this.title,
+    required this.movies,
     this.vertical = false,
   });
 
   final String title;
+  final List<Movie> movies;
   final bool vertical;
 
   @override
@@ -37,7 +40,19 @@ class MoviesBox extends StatelessWidget {
               runSpacing: 20,
               runAlignment: .center,
               children: [
-                for (var i = 0; i < 10; i++) MovieCard(),
+                for (var movie in movies)
+                  MovieCard(
+                    id: movie.id,
+                    title: movie.title,
+                    year:
+                        movie.releaseDate != null &&
+                            movie.releaseDate!.isNotEmpty
+                        ? DateTime.parse(movie.releaseDate!).year
+                        : DateTime.now().year,
+                    imageUrl:
+                        'https://images.tmdb.org/t/p/w154/${movie.posterPath}',
+                    isFavorite: movie.isFavorite,
+                  ),
               ],
             ),
           ),
@@ -48,11 +63,23 @@ class MoviesBox extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               scrollDirection: .horizontal,
               padding: EdgeInsets.only(left: 20),
-              itemCount: 10,
+              itemCount: movies.length,
               itemBuilder: (context, index) {
+                final movie = movies[index];
                 return Container(
                   margin: EdgeInsets.only(right: 16),
-                  child: MovieCard(),
+                  child: MovieCard(
+                    id: movie.id,
+                    title: movie.title,
+                    year:
+                        movie.releaseDate != null &&
+                            movie.releaseDate!.isNotEmpty
+                        ? DateTime.parse(movie.releaseDate!).year
+                        : DateTime.now().year,
+                    imageUrl:
+                        'https://images.tmdb.org/t/p/w154/${movie.posterPath}',
+                    isFavorite: movie.isFavorite,
+                  ),
                 );
               },
             ),

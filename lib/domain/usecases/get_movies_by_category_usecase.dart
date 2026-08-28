@@ -11,15 +11,15 @@ class GetMoviesByCategoryUsecase {
   Future<Result<MoviesByCategory>> execute() async {
     final results = await Future.wait([
       _tmdbRepository.getPopularMovies(),
-      _tmdbRepository.getNowPlayingMovies(),
       _tmdbRepository.getTopRatedMovies(),
+      _tmdbRepository.getNowPlayingMovies(),
       _tmdbRepository.getUpcomingMovies(),
     ]);
 
     if (results case [
       Success<List<Movie>>(value: final popularMovies),
-      Success<List<Movie>>(value: final nowPlayingMovies),
       Success<List<Movie>>(value: final topRatedMovies),
+      Success<List<Movie>>(value: final nowPlayingMovies),
       Success<List<Movie>>(value: final upcomingMovies),
     ]) {
       return Success(
