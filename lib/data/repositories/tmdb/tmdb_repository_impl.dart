@@ -130,4 +130,24 @@ class TmdbRepositoryImpl implements TmdbRepository {
       );
     }
   }
+
+  @override
+  Future<Result<List<Movie>>> getMoviesByGenres({required int genreId}) async {
+    try {
+      final data = await _tmdbService.getDiscoverMovies(
+        withGenres: genreId.toString(),
+      );
+      return Success(MovieMapper.mapToMovies(data));
+    } on DioException catch (e, s) {
+      log(
+        'Erro ao buscar filmes por gênero',
+        error: e,
+        stackTrace: s,
+      );
+
+      return Failure(
+        DataException(message: 'Erro ao buscar filmes por gênero'),
+      );
+    }
+  }
 }

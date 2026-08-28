@@ -1,23 +1,27 @@
+import 'package:cinebox_flutter/ui/movies/commands/get_movies_by_genre_command.dart';
 import 'package:cinebox_flutter/ui/movies/widgets/movies_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MoviesByGenrer extends ConsumerStatefulWidget {
+class MoviesByGenrer extends ConsumerWidget {
   const MoviesByGenrer({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MoviesByGenrerState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final resultMovies = ref.watch(getMoviesByGenreCommandProvider);
 
-class _MoviesByGenrerState extends ConsumerState<MoviesByGenrer> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 130),
-      child: MoviesBox(
-        title: 'Filmes encontrados',
-        movies: [],
-        vertical: true,
+    return resultMovies.when(
+      loading: () => Center(
+        child: CircularProgressIndicator(),
+      ),
+      error: (_, _) => Center(child: Text('Erro ao carregar filmes')),
+      data: (data) => Container(
+        margin: EdgeInsets.only(bottom: 130),
+        child: MoviesBox(
+          title: 'Filmes encontrados',
+          movies: data,
+          vertical: true,
+        ),
       ),
     );
   }
