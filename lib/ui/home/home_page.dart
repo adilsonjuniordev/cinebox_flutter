@@ -1,3 +1,4 @@
+import 'package:cinebox_flutter/ui/favorites/favorites_page.dart';
 import 'package:cinebox_flutter/ui/home/widgets/home_bottom_nav_bar.dart';
 import 'package:cinebox_flutter/ui/movies/movies_page.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +24,20 @@ class _HomePageState extends ConsumerState<HomePage> {
           opacity: animation,
           child: child,
         ),
-        child: MoviesPage(),
+        child: switch (_currentIndex) {
+          0 => MoviesPage(key: ValueKey(0)),
+          1 => FavoritesPage(key: ValueKey(1)),
+          _ => MoviesPage(key: ValueKey(0)),
+        },
       ),
-      bottomNavigationBar: HomeBottomNavBar(),
+      bottomNavigationBar: HomeBottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+          });
+        },
+      ),
     );
   }
 }

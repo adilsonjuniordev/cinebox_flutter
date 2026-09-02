@@ -56,7 +56,7 @@ final class GetMoviesByCategoryUsecaseProvider
 }
 
 String _$getMoviesByCategoryUsecaseHash() =>
-    r'ee1e937b2a6758ba1014ec7b0a329dcbccfeda95';
+    r'84e67e1ae090f69afae985bbefd12e0e68cf6526';
 
 @ProviderFor(getMoviesByGenreUsecase)
 final getMoviesByGenreUsecaseProvider = GetMoviesByGenreUsecaseProvider._();
@@ -104,4 +104,52 @@ final class GetMoviesByGenreUsecaseProvider
 }
 
 String _$getMoviesByGenreUsecaseHash() =>
-    r'd9791832e62d9206423659405e8e26278f8cb537';
+    r'52403765a3169dd10e1cd5ed9c461a3728b01bf6';
+
+@ProviderFor(getMoviesBySearchUsecase)
+final getMoviesBySearchUsecaseProvider = GetMoviesBySearchUsecaseProvider._();
+
+final class GetMoviesBySearchUsecaseProvider
+    extends
+        $FunctionalProvider<
+          GetMoviesBySearchUsecase,
+          GetMoviesBySearchUsecase,
+          GetMoviesBySearchUsecase
+        >
+    with $Provider<GetMoviesBySearchUsecase> {
+  GetMoviesBySearchUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getMoviesBySearchUsecaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getMoviesBySearchUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetMoviesBySearchUsecase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetMoviesBySearchUsecase create(Ref ref) {
+    return getMoviesBySearchUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetMoviesBySearchUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetMoviesBySearchUsecase>(value),
+    );
+  }
+}
+
+String _$getMoviesBySearchUsecaseHash() =>
+    r'c00be5f3ff5c4b04c7a997826f96284dfda4460d';

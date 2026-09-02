@@ -1,7 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cinebox_flutter/ui/core/commands/favorite_movie_command.dart';
+import 'package:cinebox_flutter/ui/core/commands/remove_favorite_movie_command.dart';
+import 'package:cinebox_flutter/ui/core/commands/save_favorite_movie_command.dart';
 import 'package:cinebox_flutter/ui/core/themes/colors.dart';
+import 'package:cinebox_flutter/ui/core/widgets/loader_messages.dart';
+import 'package:cinebox_flutter/ui/core/widgets/movie_card_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class MovieCard extends ConsumerStatefulWidget {
   const MovieCard({
@@ -25,9 +31,47 @@ class MovieCard extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _MovieCardState();
 }
 
-class _MovieCardState extends ConsumerState<MovieCard> {
+class _MovieCardState extends ConsumerState<MovieCard> with LoaderAndMessages {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(favoriteMovieCommandProvider(widget.id).notifier)
+          .setFavorite(widget.isFavorite);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isFavorite = ref.watch(favoriteMovieCommandProvider(widget.id));
+
+    ref.listen(
+      saveFavoriteMovieCommandProvider(widget.key!, widget.id),
+      (_, next) {
+        next.whenOrNull(
+          error: (error, stackTrace) {
+            showErrorSnackbar(
+              'Desculpe, não foi possível salvar seu filme aos favoritos.',
+            );
+          },
+        );
+      },
+    );
+
+    ref.listen(
+      removeFavoriteMovieCommandProvider(widget.key!, widget.id),
+      (_, next) {
+        next.whenOrNull(
+          error: (error, stackTrace) {
+            showErrorSnackbar(
+              'Desculpe, não foi possível remover o filme dos favoritos.',
+            );
+          },
+        );
+      },
+    );
+
     return Stack(
       children: [
         SizedBox(
@@ -79,8 +123,9 @@ class _MovieCardState extends ConsumerState<MovieCard> {
                   );
                 },
                 placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(
+                  child: LoadingAnimationWidget.discreteCircle(
                     color: AppColors.redColor,
+                    size: 40,
                   ),
                 ),
                 fit: BoxFit.cover,
@@ -116,9 +161,27 @@ class _MovieCardState extends ConsumerState<MovieCard> {
               radius: 20,
               backgroundColor: Colors.white,
               child: IconButton(
-                onPressed: () {},
+                onPressed:
+                    widget.onFavoriteTap ??
+                    () {
+                      ref
+                          .read(
+                            movieCardViewModelProvider(
+                              widget.key!,
+                              widget.id,
+                            ).notifier,
+                          )
+                          .addOrRemoveFavorite(
+                            id: widget.id,
+                            title: widget.title,
+                            posterPath: widget.imageUrl,
+                            year: widget.year,
+                            favorite: !isFavorite,
+                          );
+                    },
                 icon: Icon(
-                  Icons.favorite_border,
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? AppColors.redColor : AppColors.lightGrey,
                   size: 20,
                 ),
               ),

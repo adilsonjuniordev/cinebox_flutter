@@ -2,9 +2,17 @@ import 'package:cinebox_flutter/ui/core/themes/colors.dart';
 import 'package:cinebox_flutter/ui/core/themes/resource.dart';
 import 'package:cinebox_flutter/ui/home/widgets/home_bottom_nav_bar_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class HomeBottomNavBar extends StatefulWidget {
-  const HomeBottomNavBar({super.key});
+  const HomeBottomNavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  final int currentIndex;
+  final ValueChanged<int> onTap;
 
   @override
   State<HomeBottomNavBar> createState() => _HomeBottomNavBarState();
@@ -33,11 +41,13 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
           enableFeedback: false,
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
-          currentIndex: 0,
+          currentIndex: widget.currentIndex,
           selectedItemColor: AppColors.redColor,
           unselectedItemColor: AppColors.lightGrey,
+          onTap: widget.onTap,
           selectedLabelStyle: TextStyle(
             fontSize: 12,
+            fontWeight: FontWeight.w700,
             color: AppColors.redColor,
           ),
           unselectedLabelStyle: TextStyle(
@@ -45,6 +55,7 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
             color: AppColors.lightGrey,
             fontWeight: FontWeight.w400,
           ),
+
           items: [
             HomeBottomNavBarItem(
               label: 'Filmes',
@@ -64,6 +75,12 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
           ],
         ),
       ),
+    ).animate().moveY(
+      begin: 250,
+      end: 0,
+      duration: 2.seconds,
+      delay: 3.seconds,
+      curve: Curves.elasticOut,
     );
   }
 }

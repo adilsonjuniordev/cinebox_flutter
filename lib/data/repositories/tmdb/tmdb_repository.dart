@@ -9,4 +9,9 @@ abstract interface class TmdbRepository {
   Future<Result<List<Movie>>> getUpcomingMovies({String language, int page});
   Future<Result<List<Movie>>> getMoviesByGenres({required int genreId});
   Future<Result<List<Genre>>> getGenres({String language});
+  Future<Result<List<Movie>>> getSearchMovies({
+    required String query,
+    String language,
+    int page,
+  });
 }

@@ -150,4 +150,30 @@ class TmdbRepositoryImpl implements TmdbRepository {
       );
     }
   }
+
+  @override
+  Future<Result<List<Movie>>> getSearchMovies({
+    required String query,
+    String language = 'pt-BR',
+    int page = 1,
+  }) async {
+    try {
+      final data = await _tmdbService.getSearchMovies(
+        query: query,
+        language: language,
+        page: page,
+      );
+      return Success(MovieMapper.mapToMovies(data));
+    } on DioException catch (e, s) {
+      log(
+        'Erro ao buscar filmes por pesquisa',
+        error: e,
+        stackTrace: s,
+      );
+
+      return Failure(
+        DataException(message: 'Erro ao buscar filmes por pesquisa'),
+      );
+    }
+  }
 }

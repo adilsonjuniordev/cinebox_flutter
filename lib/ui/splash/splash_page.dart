@@ -3,6 +3,7 @@ import 'package:cinebox_flutter/ui/core/widgets/loader_messages.dart';
 import 'package:cinebox_flutter/ui/splash/commands/check_user_logged_command.dart';
 import 'package:cinebox_flutter/ui/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
@@ -65,12 +66,22 @@ class _SplashPageState extends ConsumerState<SplashPage>
             color: Colors.black.withAlpha(170),
           ),
           Center(
-            child: Image.asset(
-              R.assetsImagesLogoPng,
-              width: 200,
-              height: 200,
-            ),
-          ),
+                child: Image.asset(
+                  R.assetsImagesLogoPng,
+                  width: 200,
+                  height: 200,
+                ),
+              )
+              .animate()
+              .flipH(
+                delay: 200.ms,
+                duration: 1.5.seconds,
+                begin: 0,
+                end: 2,
+                curve: Curves.easeInOutBack,
+                perspective: 3,
+              )
+              .shimmer(duration: 3.seconds),
         ],
       ),
     );

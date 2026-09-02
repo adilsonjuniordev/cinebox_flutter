@@ -5,21 +5,19 @@ import 'package:cinebox_flutter/domain/extensions/mark_favorite_extension.dart';
 import 'package:cinebox_flutter/domain/models/favorite_movie.dart';
 import 'package:cinebox_flutter/domain/models/movie.dart';
 
-class GetMoviesByGenreUsecase {
+class GetMoviesBySearchUsecase {
   final TmdbRepository _tmdbRepository;
   final MoviesRepository _moviesRepository;
 
-  GetMoviesByGenreUsecase({
+  GetMoviesBySearchUsecase({
     required this._tmdbRepository,
     required this._moviesRepository,
   });
 
-  Future<Result<List<Movie>>> execute({required int genreId}) async {
+  Future<Result<List<Movie>>> execute({required String query}) async {
     final results = await Future.wait([
       _moviesRepository.getMyFavoriteMovies(),
-      _tmdbRepository.getMoviesByGenres(
-        genreId: genreId,
-      ),
+      _tmdbRepository.getSearchMovies(query: query),
     ]);
 
     if (results case [

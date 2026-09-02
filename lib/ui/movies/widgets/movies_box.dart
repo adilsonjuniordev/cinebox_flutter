@@ -1,6 +1,7 @@
 import 'package:cinebox_flutter/domain/models/movie.dart';
 import 'package:cinebox_flutter/ui/core/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class MoviesBox extends StatelessWidget {
   const MoviesBox({
@@ -69,6 +70,7 @@ class MoviesBox extends StatelessWidget {
                 return Container(
                   margin: EdgeInsets.only(right: 16),
                   child: MovieCard(
+                    key: UniqueKey(),
                     id: movie.id,
                     title: movie.title,
                     year:
@@ -86,6 +88,6 @@ class MoviesBox extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ).animate().moveX(begin: 200, duration: 800.ms);
   }
 }
